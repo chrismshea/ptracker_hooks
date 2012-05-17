@@ -1,0 +1,8 @@
+#!/bin/bash
+
+TOKEN=b4b8aa330d2dbad607be9433dc2f0d77
+MESSAGE=$(git log -1 HEAD --pretty=format:%s)
+AUTHOR=$(git log -1 HEAD --pretty=format:%an)
+REVISION=$(git log -1 HEAD --pretty=format:%h)
+
+curl -H "X-TrackerToken: $TOKEN" -X POST -H "Content-type: application/xml" -d "<source_commit><message>$MESSAGE</message><author>$AUTHOR</author><commit_id>$REVISION</commit_id></source_commit>" https://www.pivotaltracker.com/services/v3/source_commits

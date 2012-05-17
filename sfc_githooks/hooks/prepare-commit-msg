@@ -1,0 +1,26 @@
+#!/bin/sh
+#
+# If they supplied a message for the commit do nothing
+if [ "$2" != "message" ] && [ "$2" != "merge" ]
+then
+  token='b4b8aa330d2dbad607be9433dc2f0d77'
+  project=[PROJECT]
+
+  # Build new message in a tempfile
+  tempfile=`mktemp pivotal-git-hook.XXXXXXXXXXXXX`
+
+  # Copy the non-comment lines from the previous message
+  # This is to support git commit --amend
+  grep -v "^#" "$1" >> "$tempfile"
+
+  # Get list of open stories from the current iteration
+  # and turn them into comments
+  curl -s -H "X-TrackerToken: ${token}" -X GET \
+   https://www.pivotaltracker.com/services/v3/projects/${project}/iterations/current \
+   | xsltproc `dirname ${0}`/xsl - >> "$tempfile"
+
+  # Copy the comment lines from previous commit message
+  grep "^#" "$1" >> "$tempfile"
+  # Make our temp file the real thing
+  mv "$tempfile" "$1"
+fi
