@@ -1,0 +1,10 @@
+#!/bin/bash
+
+PROJECT=""
+
+while [ "$PROJECT" = "" ]; do
+	read -p "Project ID? " PROJECT
+done
+
+rsync -rv /arch/sfcusers/dennis/sfc_githooks/hooks/ .git/hooks/
+sed -i "s/\[PROJECT\]/$PROJECT/g" .git/hooks/prepare-commit-msg
