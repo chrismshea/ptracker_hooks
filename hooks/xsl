@@ -6,7 +6,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 ###-------------------- SFC PIVOTAL TRACKER INTEGRATION -----------------###
 #
 #  The stories listed below have not been Delivered.
-#  Uncomment the line to associate this commit with a particular story.
+#  Simply copy the story id including the brackets and append it with your comment.
 #  If the story is not finished, delete 'Fixes'.  
 #  Replace 'Fixes' with 'Delivers' if you are delivering the story on dev.
 #
