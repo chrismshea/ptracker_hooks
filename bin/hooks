@@ -1,10 +1,18 @@
 #!/bin/bash
 
 PROJECT=""
+PROJECT_FOLDER=$(git rev-parse --show-toplevel)
 
 while [ "$PROJECT" = "" ]; do
-	read -p "Project ID? " PROJECT
+	read -p "    Project ID: " PROJECT
 done
 
-rsync -rv /arch/sfcusers/dennis/sfc_githooks/hooks/ .git/hooks/
-sed -i "s/\[PROJECT\]/$PROJECT/g" .git/hooks/prepare-commit-msg
+if [ -d "$DIRECTORY" ]; then
+  # Control will enter here if $DIRECTORY exists.
+  git clone git@github.com:chrismshea/tracker_hooks.git ~/src/tracker_hooks
+fi
+
+rsync -rv ~/src/tracker_hooks/hooks/ $PROJECT_FOLDER/.git/hooks/
+sed -i '' "s/\[PROJECT\]/$PROJECT/g" $PROJECT_FOLDER/.git/hooks/prepare-commit-msg
+
+chmod +x $PROJECT_FOLDER/.git/hooks/*
