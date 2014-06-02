@@ -1,15 +1,24 @@
 #!/bin/bash
 
+read -p "    Enter full path to desired repo directory: " DIRECTORY
+
 PROJECT=""
 PROJECT_FOLDER=$(git rev-parse --show-toplevel)
+echo $PROJECT_FOLDER
 
 while [ "$PROJECT" = "" ]; do
 	read -p "    Project ID: " PROJECT
 done
 
 if [ -d "$DIRECTORY" ]; then
-  # Control will enter here if $DIRECTORY exists.
-  git clone git@github.com:chrismshea/tracker_hooks.git ~/src/tracker_hooks
+    # Tracker hooks exists
+    echo "    Tracker Hooks repo exists updating repo"
+    cd $DIRECTORY
+    git checkout master
+    git pull origin
+else
+    # Clone the repo
+    git clone git@github.com:chrismshea/tracker_hooks.git $DIRECTORY
 fi
 
 rsync -rv ~/src/tracker_hooks/hooks/ $PROJECT_FOLDER/.git/hooks/
