@@ -3,19 +3,19 @@
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:output method="text"/>
 <xsl:template match="/">
-###-------------------- SFC PIVOTAL TRACKER INTEGRATION -----------------###
+###---------------------- PIVOTAL TRACKER INTEGRATION -------------------###
 #
 #  The stories listed below have not been Delivered.
 #  Simply copy the story id including the brackets and append it with your comment.
 #  If the story is not finished, delete 'Fixes'.  
 #  Replace 'Fixes' with 'Delivers' if you are delivering the story on dev.
 #
-#--------------------------------------------------------------------------#
+#---------------------------------------------------------------------------#
 #<xsl:for-each select="//story[current_state != 'delivered' and current_state != 'accepted']">
 # [Fixes #<xsl:value-of select="./id"/>] <xsl:value-of select="./name"/>
 </xsl:for-each>
 #
-#--------------------------------------------------------------------------#
+#---------------------------------------------------------------------------#
 #
 </xsl:template>
 </xsl:stylesheet> 
