@@ -1,5 +1,13 @@
 #!/bin/bash
 
+##
+## Description: This script is used to setup your current repo with hooks that will allow you to connect to tracker.
+## Author: Chris Shea
+## Last Updated: 6/8/2014
+##
+
+## TO Do: Setup API Token
+
 ## Establishing the project folder ##
 PROJECT_FOLDER=$(git rev-parse --show-toplevel)
 echo "Project Folder: $PROJECT_FOLDER"
