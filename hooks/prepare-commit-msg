@@ -3,7 +3,7 @@
 # If they supplied a message for the commit do nothing
 if [ "$2" != "message" ] && [ "$2" != "merge" ]
 then
-  token='b4b8aa330d2dbad607be9433dc2f0d77'
+  token='[PIVOTAL_TOKEN]'
   project=[PROJECT]
 
   # Build new message in a tempfile

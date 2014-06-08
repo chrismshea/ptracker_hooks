@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TOKEN="Pivotal Tracker API Token"
+TOKEN=[PIVOTAL_TOKEN]
 MESSAGE=$(git log -1 HEAD --pretty=format:%s)
 AUTHOR=$(git log -1 HEAD --pretty=format:%an)
 REVISION=$(git log -1 HEAD --pretty=format:%h)

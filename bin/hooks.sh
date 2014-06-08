@@ -6,7 +6,6 @@
 ## Last Updated: 6/8/2014
 ##
 
-## TO Do: Setup API Token
 
 ## Establishing the location of the directory containing the git repo for your project.
 if (! PROJECT_DIR=$(git rev-parse --show-toplevel)) 2> /dev/null;
@@ -17,6 +16,7 @@ else
     PROJECT_DIR=$(git rev-parse --show-toplevel)
     echo "Project DIR: $PROJECT_DIR"
 fi
+
 
 ## Ask for the Users API Token
 if [[ ! -f ~/.pivotaltoken ]];
@@ -29,11 +29,13 @@ if [[ ! -f ~/.pivotaltoken ]];
         echo "API Token: $PIVOTAL_TOKEN"
 fi
 
+
 ## Getting the ID for the Pivotal Tracker projec.
 PROJECT=""
 while [ "$PROJECT" = "" ]; do
 	read -p "Project ID: " PROJECT
 done
+
 
 ## Checking if the tracker_hooks repo exists, otherwise cloning it.
 read -p "Enter full path to the tracker_hooks repo directory: " DIRECTORY
@@ -50,11 +52,16 @@ fi
 
 
 ## Copy the tracker hooks from the tracker_hooks repo to your project .git/hooks" ##
-echo "Copying over the hooks from the tracker_hooks repo"
+echo "Copy tracker hooks to your .git/hooks dir."
 rsync -r ~/src/tracker_hooks/hooks/ $PROJECT_DIR/.git/hooks/
+echo "Saving your project id in the .git/hooks/prepare-commit-msg hook"
 sed -i '' "s/\[PROJECT\]/$PROJECT/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg
 chmod +x $PROJECT_DIR/.git/hooks/*
 echo "Successfully copied over the hooks. You can view/edit these in your .git/hooks directory"
+
+
+## Setup the post-commit hook with the Pivotal Tracker API Token
+sed -i '' "s/\[PIVOTAL_TOKEN\]/$PIVOTAL_TOKEN/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg $PROJECT_DIR/.git/hooks/post-commit
 
 ## Complete Message ##
 echo "Now when running 'git commit' you will see a list of stories and instructions for attributing commits!"
