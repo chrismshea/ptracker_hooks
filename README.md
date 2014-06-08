@@ -13,7 +13,7 @@ xsl
 Getting Setup
 -------------
 I have tried to make it simple to get started using tracker_hooks.  You can just clone the repo, copy over the hooks to
-your project .git/hooks folder and set the Pivotal Tracker project id in the .git/hooks/prepare-commit-msg file.
+your project .git/hooks DIR and set the Pivotal Tracker project id in the .git/hooks/prepare-commit-msg file.
 
 If you would like this process to be a bit more automated just copy the bin/hooks.sh script to your local bin directory,
 make it executable and you will be able to run the script from the command line, and follow the on screen prompts.
