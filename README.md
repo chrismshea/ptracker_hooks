@@ -8,7 +8,7 @@ By adding the story id, and desired action, you can add your commit message and 
 
 Dependencies
 ------------
-xsl
+- xsl
 
 Getting Setup
 -------------
