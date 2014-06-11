@@ -38,22 +38,22 @@ done
 
 
 ## Checking if the tracker_hooks repo exists, otherwise cloning it.
-read -p "Enter full path to the tracker_hooks repo directory: " DIRECTORY
+read -p "Enter full path to the ptracker_hooks repo directory: " DIRECTORY
 if [ -d "$DIRECTORY" ]; then
     # Tracker hooks exists
     echo "Tracker Hooks repo exists updating master branch."
     git --git-dir="$DIRECTORY/.git" checkout master
-    git pull origin master
+    git pull
 else
     # Clone the repo
     echo "Cloning the tracker_hooks repo"
-    git clone git@github.com:chrismshea/tracker_hooks.git $DIRECTORY
+    git clone git@github.com:chrismshea/ptracker_hooks.git $DIRECTORY
 fi
 
 
-## Copy the tracker hooks from the tracker_hooks repo to your project .git/hooks" ##
+## Copy the tracker hooks from the ptracker_hooks repo to your project .git/hooks" ##
 echo "Copy tracker hooks to your .git/hooks dir."
-rsync -r ~/src/tracker_hooks/hooks/ $PROJECT_DIR/.git/hooks/
+rsync -r $DIRECTORY/hooks/ $PROJECT_DIR/.git/hooks/
 echo "Saving your project id in the .git/hooks/prepare-commit-msg hook"
 sed -i '' "s/\[PROJECT\]/$PROJECT/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg
 chmod +x $PROJECT_DIR/.git/hooks/*
