@@ -33,7 +33,7 @@ fi
 ## Getting the ID for the Pivotal Tracker projec.
 PROJECT=""
 while [ "$PROJECT" = "" ]; do
-	read -p "Project ID: " PROJECT
+	read -p "PROJECT ID: " PROJECT
 done
 
 
@@ -43,7 +43,7 @@ if [ -d "$DIRECTORY" ]; then
     # Tracker hooks exists
     echo "Tracker Hooks repo exists updating master branch."
     git --git-dir="$DIRECTORY/.git" checkout master
-    git pull
+    git --git-dir="$DIRECTORY/.git" pull origin
 else
     # Clone the repo
     echo "Cloning the tracker_hooks repo"
