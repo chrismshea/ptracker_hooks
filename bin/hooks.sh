@@ -55,13 +55,13 @@ fi
 echo "Copy tracker hooks to your .git/hooks dir."
 rsync -r $DIRECTORY/hooks/ $PROJECT_DIR/.git/hooks/
 echo "Saving your project id in the .git/hooks/prepare-commit-msg hook"
-sed -i '' "s/\[PROJECT\]/$PROJECT/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg
+sed -i "s/\[PROJECT\]/$PROJECT/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg
 chmod +x $PROJECT_DIR/.git/hooks/*
 echo "Successfully copied over the hooks. You can view/edit these in your .git/hooks directory"
 
 
 ## Setup the post-commit hook with the Pivotal Tracker API Token
-sed -i '' "s/\[PIVOTAL_TOKEN\]/$PIVOTAL_TOKEN/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg $PROJECT_DIR/.git/hooks/post-commit
+sed -i "s/\[PIVOTAL_TOKEN\]/$PIVOTAL_TOKEN/g" $PROJECT_DIR/.git/hooks/prepare-commit-msg $PROJECT_DIR/.git/hooks/post-commit
 
 ## Complete Message ##
 echo "Now when running 'git commit' you will see a list of stories and instructions for attributing commits!"
